@@ -1,24 +1,25 @@
-/**
- * 
+/** 
+ *
  * EXERCISE 1
- * 
+ *
  * @param {Promise} promise
  * @param {thunk} action
- * 
+ *
  */
-function waitForPromise(promise, action){
-  /* IMPLEMENT ME */
+function waitForPromise(promise, action) {
+    /* IMPLEMENT ME */
+    promise.then(() => {action()});
 }
 /**
- * 
+ *
  * EXERCISE 2
- * 
- * @param {Promise} promise 
- * @param {consumer} consumer 
- * @param {handler} handler 
+ *
+ * @param {Promise} promise
+ * @param {consumer} consumer
+ * @param {handler} handler
  */
-function consumePromise(promise, consumer, handler){
-  /* IMPLEMENT ME! */
+function consumePromise(promise, consumer, handler) {
+    promise.then((res) => consumer(res)).catch(error => handler(error))
 }
 
 /**
@@ -26,6 +27,6 @@ function consumePromise(promise, consumer, handler){
  * @returns {void}
  */
 module.exports = {
-  waitForPromise,
-  consumePromise,
+    waitForPromise,
+    consumePromise,
 };
