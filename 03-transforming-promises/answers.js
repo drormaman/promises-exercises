@@ -7,8 +7,8 @@
  * @returns {Promise}
  */
 function mapPromise(promise, transformer) {
-    return promise.then((value) => transformer(value));
-    /* IMPLEMENT ME!! */
+  return promise.then((value) => transformer(value));
+  /* IMPLEMENT ME!! */
 }
 
 /**
@@ -19,7 +19,27 @@ function mapPromise(promise, transformer) {
  * @returns {Promise<number>}
  */
 function squarePromise(numberPromise) {
-    return numberPromise.then(/* IMPLEMENT ME! */);
+  //   return numberPromise.then(
+  //     (res) =>
+  //       new Promise((resolve, reject) => {
+  //         if (typeof res === "number") {
+  //           resolve(res ** 2);
+  //         } else if (!isNaN(res)) {
+  //           resolve(Number(res) ** 2);
+  //         } else {
+  //           reject(`Cannot convert '${res}' to a number!`);
+  //         }
+  //       })
+  //   );
+  return numberPromise.then((res) => {
+    if (typeof res === "number") {
+      return res ** 2;
+    } else if (!isNaN(res)) {
+      return Number(res) ** 2;
+    } else {
+      throw `Cannot convert '${res}' to a number!`;
+    }
+  });
 }
 
 /**
@@ -29,7 +49,7 @@ function squarePromise(numberPromise) {
  * @returns {Promise<number>}
  */
 function squarePromiseOrZero(promise) {
-    return squarePromise(promise).catch(/* IMPLEMENT ME! */);
+  return squarePromise(promise).catch((res) => 0);
 }
 
 /**
@@ -39,7 +59,23 @@ function squarePromiseOrZero(promise) {
  * @returns {Promise}
  */
 function switcheroo(promise) {
-    return promise.then(/* IMPLEMENT ME */);
+  return promise
+    .then(
+      (value) => {
+        throw value;
+      },
+      (error) => {
+        return error;
+      }
+    )
+    .then(
+      (value) => {
+        return value;
+      },
+      (err) => {
+        throw err;
+      }
+    );
 }
 
 /**
@@ -53,8 +89,8 @@ function switcheroo(promise) {
  */
 
 module.exports = {
-    mapPromise,
-    squarePromise,
-    squarePromiseOrZero,
-    switcheroo,
+  mapPromise,
+  squarePromise,
+  squarePromiseOrZero,
+  switcheroo,
 };
